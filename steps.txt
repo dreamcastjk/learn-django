@@ -1,0 +1,28 @@
+Первоначальное  создание и настройка проэкта
+1. django-admin startproject samplesite - создаём проэкт
+2. djangi-admin startapp bboard - создаём приложение в проэкте
+3. Стартуем сервер - python3 manage.py runserver
+4. В файле настроек проэкета (settings.py) добавляем наше приложение в список INSTALLED_APPS,
+    указываем путь к классу конфигурации приложения - bboard.apps.BboardConfig
+5. Создаём в нашем приложении файл urls.py, добавляем строчки:
+
+    from django.urls import path
+    from .views import index
+
+    urlpatterns = [
+        path('', index),
+    ]
+
+6. Добавляем наш urls.py проэкта в файл urls.py приложения:
+
+    from django.contrib import admin
+    from django.urls import path, include
+
+    urlpatterns = [
+        path('bboard/', include('bboard.urls')),
+        path('admin/', admin.site.urls),
+    ]
+
+АДМИНКА
+1. Создаём суперпользователя - manage.py createsuperuser
+2. Чтобы модель появилась в админке в списке наших приложений проэкта в admin.py приложения регаем admin.site.register(Bb)
